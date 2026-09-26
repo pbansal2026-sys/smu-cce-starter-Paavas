@@ -21,6 +21,16 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+## Run the Streamlit app
+
+From the project folder, run:
+
+```bash
+python -m streamlit run src/app.py
+```
+
+In GitHub Codespaces, open the forwarded port shown by Streamlit. In the Ports panel, make the port **Public**, then select **Open in Browser**. Enter a ticker such as `MU` or `GOOG`, choose an analysis, and click **Run**.
+
 5. Start Jupyter Notebook:
 
 ```bash
@@ -33,7 +43,7 @@ If you are using VS Code, you can also open a notebook and run the cells from th
 
 ## Code Walkthrough
 
-This repository is a beginner-friendly starter project for working with financial data using Python.
+This repository is a beginner-friendly starter project for working with financial data using Python. The notebooks demonstrate the original data-fetching logic, while `src/analysis.py` contains reusable functions and `src/app.py` displays their results in Streamlit.
 
 ### Main folders and files
 
