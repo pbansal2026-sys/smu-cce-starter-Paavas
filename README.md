@@ -3,19 +3,25 @@
 If you are new to Python or Jupyter, follow these steps in a terminal from the project folder.
 
 1. Open the project folder in VS Code or GitHub Codespaces.
-2. Create a virtual environment:
+2. Check that Python is version 3.8 or newer:
+
+```bash
+python --version
+```
+
+3. Create a virtual environment:
 
 ```bash
 python -m venv .venv
 ```
 
-3. Activate it:
+4. Activate it:
 
 ```bash
 source .venv/bin/activate
 ```
 
-4. Install the required Python packages:
+5. Install the required Python packages:
 
 ```bash
 pip install -r requirements.txt
@@ -26,6 +32,7 @@ pip install -r requirements.txt
 From the project folder, run:
 
 ```bash
+python -m streamlit run src/app.py
 ```
 
 In GitHub Codespaces, open the forwarded port shown by Streamlit. In the Ports panel, make the port **Public**, then select **Open in Browser**. Enter a ticker such as `MU` or `GOOG`, choose an analysis, and click **Run**.
@@ -50,6 +57,23 @@ The same steps work on an EC2 instance after cloning the project, installing
 relative to `src/`, not the launch directory, and uses the instance's existing disk;
 no EBS volume or CloudFormation change is required. Files saved on Codespaces are
 not automatically copied to EC2 (or vice versa).
+
+If an EC2 launch reports `TypeError: unsupported operand type(s) for |`, the
+instance is using an older checkout or an incompatible virtual environment.
+Pull the latest code, recreate the environment, and install the dependencies
+again:
+
+```bash
+git pull
+rm -rf .venv
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python -m streamlit run src/app.py
+```
+
+The `from __future__ import annotations` compatibility fix prevents this error
+in the current source, while Python 3.8+ is still required by the dependencies.
 
 5. Start Jupyter Notebook:
 
