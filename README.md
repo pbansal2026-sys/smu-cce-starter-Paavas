@@ -26,10 +26,30 @@ pip install -r requirements.txt
 From the project folder, run:
 
 ```bash
-python -m streamlit run src/app.py
 ```
 
 In GitHub Codespaces, open the forwarded port shown by Streamlit. In the Ports panel, make the port **Public**, then select **Open in Browser**. Enter a ticker such as `MU` or `GOOG`, choose an analysis, and click **Run**.
+
+## Save and view previous analyses
+
+After an analysis is displayed, click **Save Analysis**. Nimbus writes a Markdown file
+to `analyses-data/` at the project root. The filename includes the ticker, analysis
+type, and a UTC timestamp. The folder is created automatically and is ignored by Git,
+so saved analyses remain local to the machine running the app.
+
+The **Previous Analyses** section lists saved files newest first. Select one and click
+**Show** to open its rendered Markdown in a pop-up. Selecting a file alone does not
+open it. To verify the feature in Codespaces:
+
+1. Run the app using the command above and save an analysis.
+2. Confirm that a new `.md` file appears in `analyses-data/`.
+3. Refresh the app, select the file under **Previous Analyses**, and click **Show**.
+
+The same steps work on an EC2 instance after cloning the project, installing
+`requirements.txt`, and starting Streamlit from any directory. Storage is resolved
+relative to `src/`, not the launch directory, and uses the instance's existing disk;
+no EBS volume or CloudFormation change is required. Files saved on Codespaces are
+not automatically copied to EC2 (or vice versa).
 
 5. Start Jupyter Notebook:
 
